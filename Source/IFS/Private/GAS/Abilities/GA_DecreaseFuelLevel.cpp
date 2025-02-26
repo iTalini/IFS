@@ -1,12 +1,14 @@
 #include "GAS/Abilities/GA_DecreaseFuelLevel.h"
 #include "GAS/Effects/GE_FireBurning.h"
 #include "GAS/IBS_AttributeSet.h"
+#include "Abilities/GameplayAbility.h"
 #include "Fireplace/Fireplace_Base.h"
 
 
 UGA_DecreaseFuelLevel::UGA_DecreaseFuelLevel()
 {
-    SetAssetTags(FGameplayTagContainer(FGameplayTag::RequestGameplayTag(FName("Ability.Fire.DecreaseFuel"))));
+    FGameplayTag Tag = FGameplayTag::RequestGameplayTag(FName("Abilities.Fireplace.DecreaseFuel"));
+    AbilityTags.AddTag(Tag);
 }
 
 void UGA_DecreaseFuelLevel::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,

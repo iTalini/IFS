@@ -5,7 +5,8 @@
 
 UGA_AddFuel::UGA_AddFuel()
 {
-    SetAssetTags(FGameplayTagContainer(FGameplayTag::RequestGameplayTag(FName("Ability.Fire.AddFuel"))));
+    FGameplayTag Tag = FGameplayTag::RequestGameplayTag(FName("Abilities.Fireplace.AddFuel"));
+    AbilityTags.AddTag(Tag);
 }
 
 void UGA_AddFuel::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,

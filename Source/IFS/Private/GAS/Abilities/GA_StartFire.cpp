@@ -3,12 +3,14 @@
 #include "Fireplace/Fireplace_Base.h"
 #include "GAS/IBS_AttributeSet.h"
 #include "NiagaraComponent.h"
+#include "Abilities/GameplayAbility.h"
 #include "GAS/Effects/GE_FireBurning.h"
 
 
 UGA_StartFire::UGA_StartFire()
 {
-    SetAssetTags(FGameplayTagContainer(FGameplayTag::RequestGameplayTag(FName("Ability.Fire.Start"))));
+    FGameplayTag Tag = FGameplayTag::RequestGameplayTag(FName("Abilities.Fireplace.Start"));
+    AbilityTags.AddTag(Tag);
 }
 
 void UGA_StartFire::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
@@ -46,7 +48,7 @@ void UGA_StartFire::ActivateAbility(const FGameplayAbilitySpecHandle Handle, con
         Attributes->IsFireOn.SetCurrentValue(1.0f);
 
         TArray<FGameplayAbilitySpecHandle> FoundAbilityHandles;
-        FGameplayTag FireBurningTag = FGameplayTag::RequestGameplayTag(FName("Ability.Fire.DecreaseFuel"));
+        FGameplayTag FireBurningTag = FGameplayTag::RequestGameplayTag(FName("Abilities.Fireplace.DecreaseFuel"));
 
         ASC->FindAllAbilitiesWithTags(FoundAbilityHandles, FGameplayTagContainer(FireBurningTag));
 

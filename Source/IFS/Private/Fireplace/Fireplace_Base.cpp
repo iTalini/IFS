@@ -4,6 +4,7 @@
 #include "Fireplace/Fireplace_Base.h"
 #include "AbilitySystemComponent.h"
 #include "GAS/Abilities/GA_DecreaseFuelLevel.h"
+#include "GAS/IBS_AttributeSet.h"
 #include "Components/WidgetComponent.h"
 #include "NiagaraComponent.h"
 #include "Widgets/BasicProgressBar.h"
@@ -33,13 +34,15 @@ void AFireplace_Base::UpdateFireVisual_Implementation(float NewIntensity)
 {
 	if (FireEffect)
 	{
+		if (AttributeSet->IsFireOn.GetCurrentValue() <= 0.0f || (FireEffect->IsActive() && NewIntensity <= 0.0f))
+		{
+			FireEffect->Deactivate();
+			return;
+		}
+
 		if (!FireEffect->IsActive() && NewIntensity > 0.0f)
 		{
 			FireEffect->Activate();
-		}
-		else if (FireEffect->IsActive() && NewIntensity <= 0.0f)
-		{
-			FireEffect->Deactivate();
 		}
 
 		FireEffect->SetFloatParameter(UniformCurveScaleName, FMath::Clamp(NewIntensity, 0.0f, 1.0f));
@@ -98,7 +101,7 @@ void AFireplace_Base::TryToStartFire()
 	if (AbilitySystemComponent)
 	{
 		FGameplayTagContainer FireTags;
-		FireTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Ability.Fire.Start")));
+		FireTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Abilities.Fireplace.Start")));
 
 		AbilitySystemComponent->TryActivateAbilitiesByTag(FireTags);
 	}
@@ -109,7 +112,7 @@ void AFireplace_Base::TryToAddFuel()
 	if (AbilitySystemComponent)
 	{
 		FGameplayTagContainer AddFuelTags;
-		AddFuelTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Ability.Fire.AddFuel")));
+		AddFuelTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Abilities.Fireplace.AddFuel")));
 
 		AbilitySystemComponent->TryActivateAbilitiesByTag(AddFuelTags);
 	}

@@ -5,9 +5,9 @@ void FIFSModule::StartupModule()
 {
     UGameplayTagsManager& TagsManager = UGameplayTagsManager::Get();
 
-    TagsManager.AddNativeGameplayTag(FName("Ability.Fire.DecreaseFuel"), TEXT("Gameplay Ability that decreases fuel over time"));
-    TagsManager.AddNativeGameplayTag(FName("Ability.Fire.Start"), TEXT("Gameplay Ability that starts fire"));
-    TagsManager.AddNativeGameplayTag(FName("Ability.Fire.AddFuel"), TEXT("Gameplay Ability that adds fuel to the fire"));
+    TagsManager.AddNativeGameplayTag(FName("Abilities.Fireplace.DecreaseFuel"), TEXT("Gameplay Ability that decreases fuel over time"));
+    TagsManager.AddNativeGameplayTag(FName("Abilities.Fireplace.Start"), TEXT("Gameplay Ability that starts fire"));
+    TagsManager.AddNativeGameplayTag(FName("Abilities.Fireplace.AddFuel"), TEXT("Gameplay Ability that adds fuel to the fire"));
 }
 
 

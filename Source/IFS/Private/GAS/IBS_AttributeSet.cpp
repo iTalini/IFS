@@ -86,7 +86,7 @@ void UIBS_AttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 		{
 			if (GetFuelLevel() <= 0.f)
 			{
-				SetIsFireOn(0.0f);
+				IsFireOn.SetCurrentValue(0.0f);
 			}
 			FireplaceActor->HandleFuelLevelChanged();
 		}
